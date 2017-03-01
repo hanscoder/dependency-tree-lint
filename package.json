@@ -1,0 +1,60 @@
+{
+  "name": "dependency-tree-lint",
+  "version": "1.0.0",
+  "description": "Checks the dependency tree for range and git dependencies.",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "commit": "git-cz",
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "test:watch": "npm t -- -w",
+    "test": "mocha src/index.test.js --compilers js:babel-register",
+    "cover": "nyc npm t",
+    "prebuild": "rimraf dist",
+    "build": "babel --copy-files --out-dir dist --ignore *.test.js src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanscoder/dependency-tree-lint.git"
+  },
+  "keywords": [
+    "prototype",
+    "lib"
+  ],
+  "author": "Hans Sowa <hanssowa@gmail.com> (http://www.givval.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanscoder/dependency-tree-lint/issues"
+  },
+  "homepage": "https://github.com/hanscoder/dependency-tree-lint#readme",
+  "devDependencies": {
+    "babel-cli": "6.23.0",
+    "babel-preset-env": "1.1.10",
+    "babel-preset-es2015": "6.22.0",
+    "babel-register": "6.23.0",
+    "chai": "3.5.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.0.0",
+    "ghooks": "2.0.0",
+    "mocha": "3.2.0",
+    "nyc": "10.1.2",
+    "rimraf": "2.6.1",
+    "semantic-release-cli": "3.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run cover && npm run check-coverage"
+    }
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
