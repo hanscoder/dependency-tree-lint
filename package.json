@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Checks the dependency tree for range and git dependencies.",
   "main": "dist/index.js",
+  "bin": "dist/bin/cli.js",
   "files": [
     "dist",
     "README.md"

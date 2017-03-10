@@ -23,4 +23,8 @@ export class Dependency {
         this.version = version;
         this.state = state;
     }
+
+    isNonRelease() {
+        return 'NON-RELEASE' === this.state;
+    }
 }
