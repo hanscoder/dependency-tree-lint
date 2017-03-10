@@ -1,15 +1,13 @@
-import {toPairs, flow, map} from 'lodash/fp';
+import {toPairs} from 'lodash';
 import {clean} from "semver";
 
 export function dependencyTreeLint(packageJson) {
     let dependencies = toPairs(packageJson["dependencies"]);
 
-    return flow(
-        map(pair => {
-            const [name, version] = pair;
-            return new Dependency(name, version, toVersionType(version));
-        })
-    )(dependencies);
+    return dependencies.map(pair => {
+        const [name, version] = pair;
+        return new Dependency(name, version, toVersionType(version));
+    });
 }
 
 function toVersionType(version) {
