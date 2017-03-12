@@ -1,6 +1,6 @@
 {
   "name": "dependency-tree-lint",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Checks the dependency tree for range and git dependencies.",
   "main": "dist/index.js",
   "bin": "dist/bin/cli.js",
@@ -15,11 +15,12 @@
     "test": "mocha src/index.test.js --compilers js:babel-register",
     "cover": "nyc npm t",
     "prebuild": "rimraf dist",
-    "build": "babel --copy-files --out-dir dist --ignore *.test.js src"
+    "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanscoder/dependency-tree-lint.git"
+    "url": "https://github.com/hanscoder/dependency-tree-lint.git"
   },
   "keywords": [
     "prototype",
@@ -46,7 +47,8 @@
     "mocha": "3.2.0",
     "nyc": "10.1.2",
     "rimraf": "2.6.1",
-    "semantic-release-cli": "3.0.3"
+    "semantic-release-cli": "3.0.3",
+    "semantic-release": "6.3.2"
   },
   "config": {
     "commitizen": {
