@@ -1,5 +1,23 @@
 # dependency-tree-lint
 
+Checks the dependency section in package.json for dependencies with non-release version.
+
+## Note
+
+It doesn't check the devDependencies and not the transitive dependencies but this is at the moment in development.
+
+## Installation
+
+```bash
+npm i -E dependency-tree-lint
+```
+
+## Usage
+
+```bash
+dependency-tree-lint
+```
+
 ## Development Hints
 
 ### Commit
