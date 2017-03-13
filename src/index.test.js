@@ -1,6 +1,7 @@
 import {describe, it} from 'mocha';
 import {expect} from 'chai';
-import {dependencyTreeLint, Dependency} from './index.js';
+import {dependencyTreeLint} from './index.js';
+import {Dependency} from './dependency.js';
 
 const ONE_DEPENDENCY_WITH_FIXED_VERSION = new Dependency("dependency1", "1.1.1", 'RELEASE');
 const ONE_DEPENDENCY_WITH_NON_FIXED_VERSION = new Dependency("dependency1", "^1.1.1", 'NON-RELEASE');

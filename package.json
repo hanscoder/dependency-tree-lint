@@ -13,7 +13,7 @@
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "check-dependency": "dependency-tree-lint",
     "test:watch": "npm t -- -w",
-    "test": "mocha src/index.test.js --compilers js:babel-register",
+    "test": "mocha src/*.test.js --compilers js:babel-register",
     "cover": "nyc npm t",
     "prebuild": "rimraf dist",
     "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
