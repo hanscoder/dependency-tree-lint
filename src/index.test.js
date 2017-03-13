@@ -12,6 +12,17 @@ const DEPENDENCYIES_WITH_DEPENDENCIES_WITH_WITH_FIXED_AND_NON_FIXED_VERSION = [
         new Dependency("dependency4", "1.1.x", 'NON-RELEASE')
     ];
 
+const PACKAGE_JSON_WITH_GROUP_DEPENDENCIES = {
+    "dependencies": {
+        "dependency1": "1.1.1",
+    }
+};
+
+const PACKAGE_JSON_WITH_GROUP_DEV_DEPENDENCIES = {
+    "devDependencies": {
+        "dependency1": "1.1.1",
+    }
+};
 
 const PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_ONE_FIXED_VERSION = {
     "dependencies": {
@@ -37,9 +48,15 @@ const PACKAGE_JSON_WITH_DEPENDENCIES_WITH_WITH_FIXED_AND_NON_FIXED_VERSION = {
 describe('dependency-tree-lint', () => {
 
     it('should group as dependency', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_ONE_FIXED_VERSION);
+        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEPENDENCIES);
 
         expect(dependencies.name).to.include("dependencies");
+    });
+
+    it('should group as devDependencies', () => {
+        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEV_DEPENDENCIES);
+
+        expect(dependencies.name).to.include("devDependencies");
     });
 
     it('should mark one dependency as release', () => {
