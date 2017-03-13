@@ -4,14 +4,15 @@ import {DependenciesGroupedByName} from "./dependency";
 
 
 export function dependencyTreeLint(packageJson) {
+    let all = [];
     let dependencies = toPairs(packageJson["dependencies"]);
+    all.push(markDependenciesForGroup(dependencies, "dependencies"));
 
-    if (dependencies.length === 0) {
-        dependencies = toPairs(packageJson["devDependencies"]);
-        return markDependenciesForGroup(dependencies, "devDependencies");
-    }
+    dependencies = toPairs(packageJson["devDependencies"]);
+    all.push(markDependenciesForGroup(dependencies, "devDependencies"));
 
-    return markDependenciesForGroup(dependencies, "dependencies");
+    return all;
+
 }
 
 function markDependenciesForGroup(dependencies, groupName) {
