@@ -24,8 +24,11 @@
     "url": "https://github.com/hanscoder/dependency-tree-lint.git"
   },
   "keywords": [
-    "prototype",
-    "lib"
+    "dependencies",
+    "devDependencies",
+    "transitive depdendencies",
+    "lint",
+    "release"
   ],
   "author": "Hans Sowa <hanssowa@gmail.com> (http://www.givval.com/)",
   "license": "MIT",
