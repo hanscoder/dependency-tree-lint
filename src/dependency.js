@@ -12,3 +12,11 @@ export class Dependency {
         return 'NON-RELEASE' ===this.state ;
     }
 }
+
+export class DependenciesGroupedByName {
+
+    constructor(name, dependencies) {
+        this.name = name;
+        this.dependencies = dependencies;
+    }
+}

@@ -1,4 +1,4 @@
-import {Dependency} from './dependency.js';
+import {Dependency} from './dependency';
 import {describe, it} from "mocha";
 import {expect} from 'chai';
 
@@ -15,4 +15,5 @@ describe('Dependency', () => {
 
         expect(dependency.isNonRelease()).to.be.false;
     });
+
 });
