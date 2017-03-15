@@ -57,39 +57,58 @@ const PACKAGE_JSON_WITH_DEPENDENCIES_AND_DEV_DEPENDENCIES = {
 describe('dependency-tree-lint', () => {
 
     it('should group as dependency', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEPENDENCIES);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEPENDENCIES, result => {
+            dependencies = result;
+        });
 
         expect(dependencies[0].name).to.include("dependencies");
     });
 
     it('should group as devDependencies', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEV_DEPENDENCIES);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_GROUP_DEV_DEPENDENCIES, result => {
+            dependencies = result;
+        });
+
         expect(dependencies[1].name).to.include("devDependencies");
     });
 
     it('should mark one dependency as release', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_ONE_FIXED_VERSION);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_ONE_FIXED_VERSION, result => {
+            dependencies = result;
+        });
 
         expect(dependencies[0].dependencies).to.include(ONE_DEPENDENCY_WITH_FIXED_VERSION);
         expect(dependencies[0].dependencies).to.have.length(1);
     });
 
     it('should mark one dependency as non release', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_NON_FIXED_VERSION);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_ONE_DEPENDENCY_WITH_NON_FIXED_VERSION, result => {
+            dependencies = result;
+        });
 
         expect(dependencies[0].dependencies).to.include(ONE_DEPENDENCY_WITH_NON_FIXED_VERSION);
         expect(dependencies[0].dependencies).to.have.length(1);
     });
 
     it('should mark more dependencies as release or non-release', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_DEPENDENCIES_WITH_WITH_FIXED_AND_NON_FIXED_VERSION);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_DEPENDENCIES_WITH_WITH_FIXED_AND_NON_FIXED_VERSION, result => {
+            dependencies = result;
+        });
 
         expect(dependencies[0].dependencies).to.deep.include.members(DEPENDENCIES_WITH_DEPENDENCIES_WITH_WITH_FIXED_AND_NON_FIXED_VERSION);
         expect(dependencies[0].dependencies).to.have.length(4);
     });
 
     it('should group by dependencies and devDependencies', () => {
-        let dependencies = dependencyTreeLint(PACKAGE_JSON_WITH_DEPENDENCIES_AND_DEV_DEPENDENCIES);
+        let dependencies = [];
+        dependencyTreeLint(PACKAGE_JSON_WITH_DEPENDENCIES_AND_DEV_DEPENDENCIES, result => {
+            dependencies = result;
+        });
 
         expect(dependencies[0].name).to.include("dependencies");
         expect(dependencies[1].name).to.include("devDependencies");

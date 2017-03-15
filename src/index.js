@@ -3,7 +3,7 @@ import {Dependency} from './dependency'
 import {DependenciesGroupedByName} from "./dependency";
 
 
-export function dependencyTreeLint(packageJson) {
+export function dependencyTreeLint(packageJson, result) {
     let all = [];
     let dependencies = toPairs(packageJson["dependencies"]);
     all.push(markDependenciesForGroup(dependencies, "dependencies"));
@@ -11,8 +11,7 @@ export function dependencyTreeLint(packageJson) {
     dependencies = toPairs(packageJson["devDependencies"]);
     all.push(markDependenciesForGroup(dependencies, "devDependencies"));
 
-    return all;
-
+    result(all);
 }
 
 function markDependenciesForGroup(dependencies, groupName) {
