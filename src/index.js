@@ -1,20 +1,32 @@
 import {toPairs} from 'lodash';
 import {Dependency} from './dependency'
 import {DependenciesGroupedByName} from "./dependency";
+import async from 'async';
+
 
 
 export function dependencyTreeLint(packageJson, result) {
     let all = [];
-    let dependencies = toPairs(packageJson["dependencies"]);
-    all.push(markDependenciesForGroup(dependencies, "dependencies"));
+    let queue = async.queue((task, done) => markVersionForDependencies(task, done));
 
-    dependencies = toPairs(packageJson["devDependencies"]);
-    all.push(markDependenciesForGroup(dependencies, "devDependencies"));
+    queue.drain = () => {
+        result(all);
+    };
 
-    result(all);
+    queue.push({all: all, packageJson: packageJson, group: "dependencies"});
+    queue.push({all: all, packageJson: packageJson, group: "devDependencies"});
 }
 
-function markDependenciesForGroup(dependencies, groupName) {
+function markVersionForDependencies(task, done) {
+    let dependencies = toPairs(task.packageJson[task.group]);
+    let markedDependencies = markVersionForDependenciesForGroup(dependencies, task.group);
+
+    task.all.push(markedDependencies);
+
+    done();
+}
+
+function markVersionForDependenciesForGroup(dependencies, groupName) {
     let markedDependencies = dependencies.map(pair => {
         const [name, version] = pair;
         return new Dependency(name, version);
