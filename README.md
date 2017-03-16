@@ -1,5 +1,8 @@
 # dependency-tree-lint
 
+[![Travis build](https://img.shields.io/travis/hanscoder/dependency-tree-lint/master.svg)](https://travis-ci.org/hanscoder/dependency-tree-lint)
+[![npm](https://img.shields.io/npm/v/dependency-tree-lint.svg)](https://www.npmjs.com/package/dependency-tree-lint)
+
 Checks the dependencies and devDependencies section in package.json for dependencies with non-release version.
 
 ## Note
