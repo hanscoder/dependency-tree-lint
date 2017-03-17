@@ -15,7 +15,7 @@ after_success:
 script:
   - npm run check-dependency
   - npm run lint
-  - npm t
+  - npm run cover
   - npm run build
 branches:
   except:

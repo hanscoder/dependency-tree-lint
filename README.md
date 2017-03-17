@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/dependency-tree-lint.svg)](https://www.npmjs.com/package/dependency-tree-lint)
 [![dependencies Status](https://david-dm.org/hanscoder/dependency-tree-lint/status.svg)](https://david-dm.org/hanscoder/dependency-tree-lint)
 [![devDependencies Status](https://david-dm.org/hanscoder/dependency-tree-lint/dev-status.svg)](https://david-dm.org/hanscoder/dependency-tree-lint?type=dev)
-
+[![Coverage Status](https://coveralls.io/repos/github/hanscoder/dependency-tree-lint/badge.svg?branch=master)](https://coveralls.io/github/hanscoder/dependency-tree-lint?branch=master)
 
 Checks the dependencies and devDependencies section in package.json for dependencies with non-release version.
 
