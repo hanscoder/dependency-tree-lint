@@ -1,22 +1,20 @@
-import {clean} from "semver";
+import {clean} from 'semver'
 
 export class Dependency {
+  constructor (name, version) {
+    this.name = name
+    this.version = version.trim()
+    this.state = clean(version.trim()) !== null ? 'RELEASE' : 'NON-RELEASE'
+  }
 
-    constructor(name, version) {
-        this.name = name;
-        this.version = version.trim();
-        this.state = clean(version.trim()) !== null ? 'RELEASE' : 'NON-RELEASE';
-    }
-
-    isNonRelease() {
-        return 'NON-RELEASE' ===this.state ;
-    }
+  isNonRelease () {
+    return this.state === 'NON-RELEASE'
+  }
 }
 
 export class DependenciesGroupedByName {
-
-    constructor(name, dependencies) {
-        this.name = name;
-        this.dependencies = dependencies;
-    }
+  constructor (name, dependencies) {
+    this.name = name
+    this.dependencies = dependencies
+  }
 }

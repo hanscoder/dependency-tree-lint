@@ -14,6 +14,7 @@ after_success:
   - npm run semantic-release
 script:
   - npm run check-dependency
+  - npm run lint
   - npm t
   - npm run build
 branches:

@@ -13,6 +13,7 @@
     "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "check-dependency": "dependency-tree-lint",
     "test:watch": "npm t -- -w",
+    "lint": "standard",
     "test": "mocha src/*.test.js --compilers js:babel-register",
     "cover": "nyc npm t",
     "prebuild": "rimraf dist",
@@ -54,7 +55,8 @@
     "rimraf": "2.6.1",
     "semantic-release-cli": "3.0.3",
     "semantic-release": "6.3.2",
-    "dependency-tree-lint": "1.2.0"
+    "dependency-tree-lint": "1.2.0",
+    "standard": "9.0.1"
   },
   "config": {
     "commitizen": {
