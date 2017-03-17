@@ -15,7 +15,8 @@
     "test:watch": "npm t -- -w",
     "lint": "standard",
     "test": "mocha src/*.test.js --compilers js:babel-register",
-    "cover": "nyc npm t && nyc report --reporter=text-lcov | coveralls",
+    "coverage:upload": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm t",
     "prebuild": "rimraf dist",
     "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
