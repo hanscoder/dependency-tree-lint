@@ -9,16 +9,11 @@ try {
   let packageJson = require(packageFile)
 
   dependencyTreeLint(packageJson, result => {
-    result.forEach((group) => {
-      console.log('%s:', group.name)
-      group.dependencies.forEach((dependency) => {
-        console.log('%s: %s - %s', dependency.name, dependency.version, dependency.state)
-      })
-      console.log('\n')
-    })
+    result.forEachSection(section => dumpSection(section))
 
-    if (dependencyWithAtLeastOneNonRelease(result[0].dependencies) || dependencyWithAtLeastOneNonRelease(result[1].dependencies)) {
+    if (result.hasAtLeastOneDependencyWithNonRelease()) {
       console.log('There are dependencies with a non release version! Use only dependencies with a release version.')
+      // noinspection JSUnresolvedVariable,JSUnresolvedFunction
       process.exit(1)
     }
 
@@ -26,9 +21,16 @@ try {
   })
 } catch (err) {
   console.error(err.stack)
+  // noinspection JSUnresolvedVariable,JSUnresolvedFunction
   process.exit(1)
 }
 
-function dependencyWithAtLeastOneNonRelease (dependencies) {
-  return dependencies.find(dependency => dependency.isNonRelease())
+function dumpSection (section) {
+  console.log('%s:', section.name)
+  section.forEachDependency(dependency => dumpDependency(dependency))
+  console.log('\n')
+}
+
+function dumpDependency (dependency) {
+  console.log('%s: %s - %s', dependency.name, dependency.version, dependency.state)
 }

@@ -1,32 +1,32 @@
 import {toPairs} from 'lodash'
-import {Dependency, DependenciesGroupedByName} from './dependency'
+import {Dependency, Section} from './dependency'
 import async from 'async'
 
 export function dependencyTreeLint (packageJson, result) {
-  let all = []
-  let queue = async.queue((task, done) => markVersionForDependencies(task, done))
+  let sections = []
+  let queue = async.queue((task, done) => loadSection(task, done))
 
   queue.drain = () => {
-    result(all)
+    result(new Dependency(packageJson.name, packageJson.version, sections))
   }
 
-  queue.push({all: all, packageJson: packageJson, group: 'dependencies'})
-  queue.push({all: all, packageJson: packageJson, group: 'devDependencies'})
+  queue.push({sections: sections, packageJson: packageJson, section: 'dependencies'})
+  queue.push({sections: sections, packageJson: packageJson, section: 'devDependencies'})
 }
 
-function markVersionForDependencies (task, done) {
-  let dependencies = toPairs(task.packageJson[task.group])
-  let markedDependencies = markVersionForDependenciesForGroup(dependencies, task.group)
+function loadSection (task, done) {
+  let dependencies = toPairs(task.packageJson[task.section])
+  let section = mapDependenciesIntoSection(dependencies, task.section)
 
-  task.all.push(markedDependencies)
+  task.sections.push(section)
 
   done()
 }
 
-function markVersionForDependenciesForGroup (dependencies, groupName) {
+function mapDependenciesIntoSection (dependencies, name) {
   let markedDependencies = dependencies.map(pair => {
     const [name, version] = pair
     return new Dependency(name, version)
   })
-  return new DependenciesGroupedByName(groupName, markedDependencies)
+  return new Section(name, markedDependencies)
 }
