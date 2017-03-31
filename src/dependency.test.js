@@ -60,7 +60,6 @@ describe('Dependency', () => {
 
     expect(providedSections).eql(dependency.sections)
   })
-
 })
 
 function asDependency (name) {
@@ -111,6 +110,4 @@ class DependencyBuilder {
   build () {
     return new Dependency(this.name, this.version, this.sections)
   }
-
 }
-
