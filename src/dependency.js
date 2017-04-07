@@ -5,9 +5,9 @@ const RELEASE = 'RELEASE'
 
 export class Dependency {
   constructor (name, version, sections) {
-    this.name = name
-    this.version = version.trim()
-    this.state = clean(version.trim()) !== null ? RELEASE : NON_RELEASE
+    this.name = name !== undefined ? name : 'unknown dependency'
+    this.version = version !== undefined ? version.trim() : 'unknown version'
+    this.state = clean(this.version) !== null ? RELEASE : NON_RELEASE
     this.sections = sections !== undefined ? sections : []
   }
 
@@ -29,13 +29,15 @@ export class Dependency {
 
 export class Section {
   constructor (name, dependencies) {
-    this.name = name
-    this.dependencies = dependencies
+    this.name = name !== undefined ? name : 'unknown section'
+    this.dependencies = dependencies !== undefined ? dependencies : []
   }
 
   hasAtLeastOneNonRelease () {
-    return this.dependencies
+    let dependency = this.dependencies
       .find(dependency => dependency.isNonRelease())
+
+    return dependency !== undefined
   }
 
   forEachDependency (callback) {
